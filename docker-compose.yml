@@ -1,0 +1,20 @@
+services:
+    app:
+        image: node:18-alpine
+        command: sh -c "yarn install && yarn run dev"
+        ports:
+            - 3000:3000
+        working_dir: /app
+        volumes:
+            - ./:/app
+        env_file:
+            - .env.app
+    mysql:
+        image: mysql:8.0
+        volumes:
+            - todo-mysql-data:/var/lib/mysql
+        env_file:
+            - .env.mysql
+
+volumes:
+    todo-mysql-data:
